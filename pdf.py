@@ -14,13 +14,15 @@ if __name__ == '__main__':
 	df.sort_values('X', inplace=True) # tim data yg lama jika ada data yg baru
 	# print(df.head(20)) # ambil 20 data
 
-	a = []
-	a.append(df.X)
-	print(a)
+	# a = []
+	# a.append(df.X)
+	# print(a)
+
+	print(df)
 
 	rata2_kec = df.X.mean() 		# kecepatan rata2
 	std_deviasi_kec = df.X.std() 	# standart deviasi
-	print(rata2_kec)
+	# print(rata2_kec)
 
 	# Hitung parameter bentuk k
 	k = pow(std_deviasi_kec / rata2_kec, -1.086)
@@ -30,11 +32,13 @@ if __name__ == '__main__':
 
 	# Tambah kolom baru kedalam dataFrame untuk PDF
 	df['pdf'] = df.X.apply(lambda v: (k / c) * pow(v / c, k - 1) * exp(-1 * pow(v / c, k)))
-	# df = df[['X', 'pdf']]		# Tampilkan hanya data x dan pdf
-	print(df.head())
+	df = df[['X', 'pdf']]		# Tampilkan hanya data x dan pdf
+	# print(df.head())
+
+	print(df)
 
 
-	fig = graph.Figure()
-	fig.add_trace(graph.Histogram(x=df.X, histnorm='probability density'))
-	fig.add_trace(graph.Scattergl(x=df.X, y=df.pdf))
-	fig.show()
+	# fig = graph.Figure()
+	# fig.add_trace(graph.Histogram(x=df.X, histnorm='probability density'))
+	# fig.add_trace(graph.Scattergl(x=df.X, y=df.pdf))
+	# fig.show()
