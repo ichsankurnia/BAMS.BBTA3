@@ -38,7 +38,7 @@ if __name__ == '__main__':
 	print(df)
 
 
-	# fig = graph.Figure()
-	# fig.add_trace(graph.Histogram(x=df.X, histnorm='probability density'))
-	# fig.add_trace(graph.Scattergl(x=df.X, y=df.pdf))
-	# fig.show()
+	fig = graph.Figure()
+	fig.add_trace(graph.Histogram(x=df.X, histnorm='probability density'))
+	fig.add_trace(graph.Scattergl(x=df.X, y=df.pdf))
+	fig.show()
