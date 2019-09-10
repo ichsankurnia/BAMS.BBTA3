@@ -38,25 +38,55 @@ def on_message(client, userdata, msg):
     node = msg.payload[0:3].decode('ascii')
     # timestamp = int(msg.payload[3:11], 16) * 1000  # dalam satuan ms
     timestamp = int(msg.payload[3:11], 16)  # dalam satuan ms
+    timestamp = datetime.datetime.fromtimestamp(timestamp).isoformat()
+
+    max_length=msg.payload[11:]
+
+    acc1 = []
+    acc2 = []
+    acc3 = []
+    ane1 = 0
+    ane2 = 0
+    ane3 = 0
 
     if args.s is None or args.s == 0:
         sensor = [struct.unpack('!f', bytes.fromhex(msg.payload[i:i+n].decode('ascii')))[0]
                   for i in range(11, len(msg.payload[11:]) + n, n)]
 
-        if node == "sb1" or node == "sb2":
+        if node == "sb1":
             acc = sensor[:-3]  # dalam bentuk List
-            ane1 = sensor[-1]  # dalam bentuk Scalar
+            acc1 = sensor[:101]
+            acc2 = sensor[101:201]
+            ane1 = sensor[-3]  # dalam bentuk Scalar
             ane2 = sensor[-2]  # dalam bentuk Scalar
-            ane3 = sensor[-3]  # dalam bentuk Scalar
+            ane3 = sensor[-1]  # dalam bentuk Scalar
+
+        elif node == "sb2":
+            acc = sensor[:-3]  # dalam bentuk List
+            acc1 = sensor[:101]
+            acc2 = sensor[101:201]
+            acc3 = sensor[201:303]
+            ane1 = sensor[-3]  # dalam bentuk Scalar
+            ane2 = sensor[-2]  # dalam bentuk Scalar
+            ane3 = sensor[-1]  # dalam bentuk Scalar
 
         else:
             acc = sensor  # dalam bentuk List
-            ane1 = 0  # dalam bentuk Scalar
-            ane2 = 0  # dalam bentuk Scalar
-            ane3 = 0  # dalam bentuk Scalar
+            acc1 = sensor[:101]
+            acc2 = sensor[101:]
+            # acc2 = sensor[101:201]
+            # ane1 = 0  # dalam bentuk Scalar
+            # ane2 = 0  # dalam bentuk Scalar
+            # ane3 = 0  # dalam bentuk Scalar
 
-        print(acc)
-        print(node, timestamp, len(sensor), '\n')
+        # print(acc)
+        print(acc1)
+        print(acc2)
+        print(acc3)
+        print(ane1)
+        print(ane2)
+        print(ane3)
+        print(node, timestamp, len(sensor), len(max_length), len(max_length)/8, '\n')
 
 
 if __name__ == "__main__":
