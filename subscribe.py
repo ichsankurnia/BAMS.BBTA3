@@ -2,6 +2,7 @@ import os
 import sys
 import struct
 import argparse
+import datetime
 import paho.mqtt.client as mqtt
 
 
@@ -32,9 +33,11 @@ def on_connect(client, userdata, flags, rc):
 
 # Buat fungsi umpan balik ketika PUBLISH MESSAGE diterima dari mqtt server.
 def on_message(client, userdata, msg):
+    # print("Connected with " + msg)
     n = 8  # pisah setiap 8 karakter
     node = msg.payload[0:3].decode('ascii')
-    timestamp = int(msg.payload[3:11], 16) * 1000  # dalam satuan ms
+    # timestamp = int(msg.payload[3:11], 16) * 1000  # dalam satuan ms
+    timestamp = int(msg.payload[3:11], 16)  # dalam satuan ms
 
     if args.s is None or args.s == 0:
         sensor = [struct.unpack('!f', bytes.fromhex(msg.payload[i:i+n].decode('ascii')))[0]
@@ -64,10 +67,11 @@ if __name__ == "__main__":
 
     print("Melakukan koneksi ke Broker...")
 
-    client.connect("bbta3.bppt.go.id", 9621)
+    client.connect("103.224.137.180", 9621)
 
     try:
-        client.username_pw_set(os.getenv('MQ_USER'), os.getenv('MQ_PWD'))
+        # client.username_pw_set(os.getenv('bams'), os.getenv('bams.pwd'))
+        client.username_pw_set('bams', 'bams.pwd')
     except KeyError:
         print('Silahkan tambah env. untuk MQ_USER dan/atau MQ_PWD')
         sys.exit()
