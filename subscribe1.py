@@ -44,8 +44,10 @@ def on_message(client, userdata, msg):
     n = 8  # pisah setiap 8 karakter
     node = msg.payload[0:3].decode('ascii')
     # timestamp = int(msg.payload[3:11], 16) * 1000  # dalam satuan ms
-    timestamp = int(msg.payload[3:11], 16)  # dalam satuan ms
-    timestamp = datetime.datetime.fromtimestamp(timestamp).isoformat()
+    # timestamp = int(msg.payload[3:11], 16)  # dalam satuan ms
+    # timestamp = datetime.datetime.fromtimestamp(timestamp).isoformat()
+    timestamp = datetime.datetime.now() - datetime.timedelta(seconds=3)
+    timestamp = timestamp.strftime("%H:%M:%S")
 
     max_length=msg.payload[11:]
 
@@ -54,15 +56,12 @@ def on_message(client, userdata, msg):
                   for i in range(11, len(msg.payload[11:]) + n, n)]
 
         if node == "sb1":
-            if len(times) < 6:
+            print(sensor[80])
+            print(sensor[180])
+
+            if len(acc1) < 5:
                 acc1.append(sensor[80])
                 acc2.append(sensor[180])
-                ane1.append(sensor[-3])
-                ane2.append(sensor[-2])
-                ane3.append(sensor[-1])
-
-                times.append(timestamp)
-
             else:
                 acc1[:-1] = acc1[1:]
                 acc1[-1] = sensor[80]
@@ -70,6 +69,11 @@ def on_message(client, userdata, msg):
                 acc2[:-1] = acc2[1:]
                 acc2[-1] = sensor[180]
 
+            if len(ane1) < 5:
+                ane1.append(sensor[-3])
+                ane2.append(sensor[-2])
+                ane3.append(sensor[-1])
+            else:
                 ane1[:-1] = ane1[1:]
                 ane1[-1] = sensor[-3]
 
@@ -79,20 +83,21 @@ def on_message(client, userdata, msg):
                 ane3[:-1] = ane3[1:]
                 ane3[-1] = sensor[-1]
 
+            if len(times) < 5:
+                times.append(timestamp)
+            else:
                 times[:-1] = times[1:]
                 times[-1] = timestamp
 
+
         elif node == "sb2":
-            if len(times) < 6:
+            print(sensor[80])
+            print(sensor[180])
+            print(sensor[280])
+
+            if len(acc1) < 5:
                 acc1.append(sensor[80])
                 acc2.append(sensor[180])
-                acc3.append(sensor[280])
-                ane1.append(sensor[-3])
-                ane2.append(sensor[-2])
-                ane3.append(sensor[-1])
-
-                times.append(timestamp)
-
             else:
                 acc1[:-1] = acc1[1:]
                 acc1[-1] = sensor[80]
@@ -100,27 +105,40 @@ def on_message(client, userdata, msg):
                 acc2[:-1] = acc2[1:]
                 acc2[-1] = sensor[180]
 
+            if len(acc3) < 5:
+                acc3.append(sensor[280])
+            else:
                 acc3[:-1] = acc3[1:]
                 acc3[-1] = sensor[280]
 
+            if len(ane1) < 5:
+                ane1.append(sensor[-3])
+                ane2.append(sensor[-2])
+                ane3.append(sensor[-1])
+            else:
+                ane1[:-1] = ane1[1:]
+                ane1[-1] = sensor[-3]
+
                 ane2[:-1] = ane2[1:]
-                ane2[-1] = sensor[-3]
+                ane2[-1] = sensor[-2]
 
                 ane3[:-1] = ane3[1:]
-                ane3[-1] = sensor[-2]
+                ane3[-1] = sensor[-1]
 
-                times[:-1] = times[1:]
-                times[-1] = sensor[-1]
-
+            if len(times) < 5:
+                times.append(timestamp)
+            else:
                 times[:-1] = times[1:]
                 times[-1] = timestamp
 
+
         else:
-            if len(times) < 6:
+            print(sensor[80])
+            print(sensor[180])
+
+            if len(acc1) < 5:
                 acc1.append(sensor[80])
                 acc2.append(sensor[180])
-
-                times.append(timestamp)
             else:
                 acc1[:-1] = acc1[1:]
                 acc1[-1] = sensor[80]
@@ -128,6 +146,9 @@ def on_message(client, userdata, msg):
                 acc2[:-1] = acc2[1:]
                 acc2[-1] = sensor[180]
 
+            if len(times) < 5:
+                times.append(timestamp)
+            else:
                 times[:-1] = times[1:]
                 times[-1] = timestamp
 
