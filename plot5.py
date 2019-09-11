@@ -21,7 +21,7 @@ while True:
     
     fig.canvas.draw()
     
-    ax.set_xlim(left=max(0, i-50), right=i+50)
+    ax.set_xlim(left=max(0, i-10), right=i+10)
     
     time.sleep(0.1)
     i += 1
