@@ -22,9 +22,6 @@ ax03 = subplot2grid((2, 2), (1, 0), colspan=2, rowspan=1)
 ax04 = ax03.twinx()
 #tight_layout()
 
-data = []
-timestamp = []
-
 # Set titles of subplots
 ax01.set_title('Accelerometer 1')
 ax02.set_title('Accelerometer 2')
@@ -62,8 +59,6 @@ yv1=zeros(0)
 yp2=zeros(0)
 yv2=zeros(0)
 t=zeros(0)
-
-print(yp1)
 
 # set plots
 p011, = ax01.plot(t,yp1,'b-', label="yp1")
@@ -122,7 +117,8 @@ def updateData(self):
 
 # interval: draw new frame every 'interval' ms
 # frames: number of frames to draw
-simulation = animation.FuncAnimation(f0, updateData, blit=False, frames=200, interval=20, repeat=False)
+simulation = animation.FuncAnimation(f0, updateData, blit=False, frames=200, interval=20, repeat=True)
+# simulation = animation.FuncAnimation(f0, updateData, blit=False, frames=200, interval=20, repeat=False)
 
 # Uncomment the next line if you want to save the animation
 #simulation.save(filename='sim.mp4',fps=30,dpi=300)
