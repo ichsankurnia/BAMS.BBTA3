@@ -29,7 +29,7 @@ def animate(i):
 	acc1, acc2 = [], []
 	timestamp = []
 	data = []
-	with open("sb4.csv", "r") as csvfile: #with untuk streaming file, secara otomatis akan close bersihin file saat ga di pake lagi
+	with open("csvfile/sb4.csv", "r") as csvfile: #with untuk streaming file, secara otomatis akan close bersihin file saat ga di pake lagi
 	    csvreader = csv.DictReader(csvfile) #bentuk dictionary
 	    array = list(csvreader)
 	    print("total baris : ", csvreader.line_num, "\n")

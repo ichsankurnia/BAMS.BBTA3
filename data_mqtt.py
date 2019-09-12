@@ -51,7 +51,7 @@ def on_message(client, userdata, msg):
     elif node == "sb2":
         acc1 = sensor[:100]
         acc2 = sensor[100:200]
-        acc2 = sensor[200:]
+        acc3 = sensor[200:]
         ane1 = sensor[-3]
         ane2 = sensor[-2]
         ane3 = sensor[-1]
