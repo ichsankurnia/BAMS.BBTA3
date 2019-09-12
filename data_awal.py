@@ -156,7 +156,7 @@ def on_message(client, userdata, msg):
 
     # array = [{"node" : node, "acc1" : sensor[80], "acc2" : sensor[180], "acc3" : sensor[280], "ane1" : sensor[-2], "ane2" : sensor[-3], "ane3" : sensor[-1], "timestamp" : timestamp},]
 
-    with open("file.csv", "w") as csvfile:
+    with open("csvfile/file.csv", "w") as csvfile:
             fields = ["node", "acc1", "acc2", "acc3", "ane1", "ane2", "ane3", "timestamp"]
             writer = csv.DictWriter(csvfile, fieldnames = fields)
 

@@ -32,7 +32,7 @@ timestamp = []
 
 # while 1:
 def animate(i):
-	with open("file.csv", "r") as csvfile: #with untuk streaming file, secara otomatis akan close bersihin file saat ga di pake lagi
+	with open("csvfile/file.csv", "r") as csvfile: #with untuk streaming file, secara otomatis akan close bersihin file saat ga di pake lagi
 	    csvreader = csv.DictReader(csvfile) #bentuk dictionary
 	    array = list(csvreader)
 	    print("total baris : ", csvreader.line_num, "\n")
