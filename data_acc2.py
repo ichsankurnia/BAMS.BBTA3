@@ -21,44 +21,42 @@ matplotlib.rc('font', **font)
 fig = plt.figure(dpi=70, num="BAMS Data Accelerometer 2") # num = 2, figsize = (2, 3)
 ax1 = fig.add_subplot(1,1,1)
 
-# data = []
-
-array = [] #array
+array = []
 
 node = ""
 acc1, acc2, acc3, ane1, ane2, ane3 = [], [], [], [], [], []
 timestamp = []
+data_ke = []
 
-# while 1:
 def animate(i):
 	with open("csvfile/file.csv", "r") as csvfile: #with untuk streaming file, secara otomatis akan close bersihin file saat ga di pake lagi
-	    csvreader = csv.DictReader(csvfile) #bentuk dictionary
+	    csvreader = csv.DictReader(csvfile)
 	    array = list(csvreader)
-	    print("total baris : ", csvreader.line_num, "\n")
+	    # print("total baris : ", csvreader.line_num, "\n")
 
 	for x in array:
 	    node = x["node"]
-	    if len(acc2) < 10:
+	    timestamp = x["timestamp"]
+	    if len(acc2) < 100:
 	    	acc2.append(double(x["acc2"]))
-	    	timestamp.append(x["timestamp"])
+	    	data_ke.append(i)	# nilai i dari function animate(i)
 	    else:
-	    	acc2[:-1] = acc2[1:]
-	    	acc2[-1] = double(x["acc2"])
+	    	acc1[:-1] = acc1[1:]
+	    	acc1[-1] = double(x["acc1"])
 
-	    	timestamp[:-1] = timestamp[1:]
-	    	timestamp[-1] = x["timestamp"]
+	    	data_ke[:-1] = data_ke[1:]
+	    	data_ke[-1] = data_ke(i)
 
-	    print(node)
-
-	print(timestamp)
+	
+	print(node, timestamp)
 	print(acc2)
-	# time.sleep(1)
+	print(data_ke)
 
 	ax1.clear()
-	ax1.plot(timestamp, acc2)
+	ax1.plot(data_ke, acc2)
 	plt.ylabel('Accelerometer 2 (m/s^2)')
-	plt.xlabel('Timestamp (H:M:S)')
-	plt.title('Bridge Aeroelastic Monitoring System\nLive Data Accelerometer 2 From Node : {}'.format(node))
+	plt.xlabel('Number Of Data')
+	plt.title('Bridge Aeroelastic Monitoring System\nLive Data From Node : {}\n Timestamp: {}'.format(node, timestamp))
 
 def show_data():
 	ani=animation.FuncAnimation(fig, animate, interval=5000)
