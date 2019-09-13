@@ -43,9 +43,9 @@ def on_message(client, userdata, msg):
               for i in range(11, len(msg.payload[11:]) + n, n)]
 
     if node == "sb1":
-        array = [{"node" : node, "acc1" : sensor[80], "acc2" : sensor[180], "acc3" : 0, "ane1" : sensor[-2], "ane2" : sensor[-3], "ane3" : sensor[-1], "timestamp" : timestamp},]
+        array = [{"node" : node, "acc1" : sensor[80], "acc2" : sensor[180], "acc3" : 0, "ane1" : sensor[-3], "ane2" : sensor[-2], "ane3" : sensor[-1], "timestamp" : timestamp},]
     elif node == "sb2":
-        array = [{"node" : node, "acc1" : sensor[80], "acc2" : sensor[180], "acc3" : sensor[280], "ane1" : sensor[-2], "ane2" : sensor[-3], "ane3" : sensor[-1], "timestamp" : timestamp},]
+        array = [{"node" : node, "acc1" : sensor[80], "acc2" : sensor[180], "acc3" : sensor[280], "ane1" : sensor[-3], "ane2" : sensor[-2], "ane3" : sensor[-1], "timestamp" : timestamp},]
     else:
         array = [{"node" : node, "acc1" : sensor[80], "acc2" : sensor[180], "acc3" : 0, "ane1" : 0, "ane2" : 0, "ane3" : 0, "timestamp" : timestamp},]
     
