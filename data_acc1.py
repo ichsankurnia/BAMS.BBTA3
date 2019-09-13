@@ -29,6 +29,7 @@ array = [] #array
 node = ""
 acc1, acc2, acc3, ane1, ane2, ane3 = [], [], [], [], [], []
 timestamp = []
+data_ke = []
 
 # while 1:
 def animate(i):
@@ -39,29 +40,30 @@ def animate(i):
 
 	for x in array:
 	    node = x["node"]
-	    if len(acc1) < 10:
+	    timestamp = x["timestamp"]
+	    if len(acc1) < 100:
 	    	acc1.append(double(x["acc1"]))
-	    	timestamp.append(x["timestamp"])
+	    	data_ke.append(i)	# nilai i dari function animate(i)
 	    else:
 	    	acc1[:-1] = acc1[1:]
 	    	acc1[-1] = double(x["acc1"])
 
-	    	timestamp[:-1] = timestamp[1:]
-	    	timestamp[-1] = x["timestamp"]
+	    	data_ke[:-1] = data_ke[1:]
+	    	data_ke[-1] = data_ke(i)
 
-	    print(node)
 
-	print(timestamp)
+	print(node, timestamp)
 	print(acc1)
+	print(data_ke)
 	# time.sleep(1)
 
 	ax1.clear()
 	# ax1.bar(timestamp, acc1)
-	ax1.plot(timestamp, acc1)
+	ax1.plot(data_ke, acc1)
 	# ax1.scatter(timestamp, acc1)
 	plt.ylabel('Accelerometer 1 (m/s^2)')
-	plt.xlabel('Timestamp (H:M:S)')
-	plt.title('Bridge Aeroelastic Monitoring System\nLive Data From Node : {}'.format(node))
+	plt.xlabel('Number Of Data')
+	plt.title('Bridge Aeroelastic Monitoring System\nLive Data From Node : {}\n Timestamp: {}'.format(node, timestamp))
 
 def show_data():
 	ani=animation.FuncAnimation(fig, animate, interval=5000)
