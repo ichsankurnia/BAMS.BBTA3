@@ -1,3 +1,5 @@
 certifi==2019.6.16
 paho-mqtt==1.4.0
 matplotlib==3.1.0
+pandas==0.24.2
+plotly==4.1.0
